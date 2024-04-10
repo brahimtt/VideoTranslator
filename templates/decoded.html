@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} Upload Image {% endblock %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>WELCOME TO DAO-OCR</h1>
+      <h2>OPTICAL CHARACTER RECOGNITION TOOL</h2>
+      <!-- <a href="{{url_for('upload')}}" class="btn-get-started">Upload</a> -->
+      <div>
+        <h4>UPLOAD A TEXT IMAGE FILE</h4>
+        <form method=post enctype=multipart/form-data>
+          <p><input class="btn-get-started" type=file name=file>
+          <a href="{{ url_for('upload') }}"><button class="btn-get-started"  name="submitim" onclick="imagetotext()">Image To Text</button></a>
+          <a href="{{ url_for('decoded') }}"><button class="btn-get-started"  name="submitau" onclick="imagetoaudio()">Image To Audio</button></a>
+        </form>
+      </div>
+      <div>
+        {% if msg %}
+        <h2 class="btn-get-started">{{ msg }}</h2>
+        {% endif %}
+      </div>
+      <div><strong class="bi bi-arrow-down-circle" style="color: white;"></strong></div>
+    </div>
+    
+  </section><!-- End Hero Section -->
+  <div id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <div class="transparent-box" style="overflow: auto;">
+        <h2>RESULT:</h2>
+        <div>
+        <!--<h2 class="btn-get-started"> The extracted text from the image is:</h2>
+        <img src="static/test-img/temp.png" type="image/png" style="border-radius: 2%;"/>
+        <div id="output" class="btn-get-started-text" style="overflow: auto;"> <h2 id="myText" style="font-size: small;">{{ extracted_text }}</h2></div>
+        <button class="btn-get-started" onclick="copyToClipboard()">Copy Text</button>-->
+        
+        
+        {% if extract_text %}
+          <div class="d-flex justify-content-center mt-4">
+              <audio controls autoplay class="m-auto">
+                  <source src="{{'static/audio/' + file}}" type="audio/mpeg">
+                  Your browser does not support the audio.
+              </audio>
+          </div>
+          <div>
+            {% else %}
+            <h3> The extracted text will be displayed here: </h3>
+            {% endif %}
+          </div>
+
+              
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

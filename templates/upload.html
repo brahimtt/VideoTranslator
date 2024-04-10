@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %} Upload Image {% endblock %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>WELCOME TO VIDEOS TRANSLATOR</h1>
+      <h2>VIDEOS TRANSLATE LANGUAGE TOKEN  TOOL</h2>
+      <!-- <a href="{{url_for('upload')}}" class="btn-get-started">Upload</a> -->
+      <div>
+        <h4>UPLOAD A VIDEO FILE</h4>
+        <form method=post enctype=multipart/form-data id="translatorForm" >
+          <input class="btn-get-started" type=file name=file style="width: 500px;height: 500px; padding-top: 200px;text-align: center;">
+          <div id="videoConverter">
+
+            <label for="inputLanguage" class="label-1">Input language</label>
+            <select  id="inputLanguage" name="initial-language">
+              <option value="en-US">English</option>
+              <option value="it-IT">Italiaan</option>
+              <option value="es-MX">Spanish</option>
+              <option value="ru-RU">Russian</option>
+              <option value="de-DE">German</option>
+              <option value="ja-JA">Japanese</option>
+              <option value="pt-BR">Portuguese</option>
+            </select>
+            <label for="outputLanguage" class="label-1">Output language</label>
+            <select  id="outputLanguage" name="final-language">
+              <option value="en">English</option>
+              <option value="it">Italian</option>
+              <option value="es">Spanish</option>
+              <option value="ru">Russian</option>
+              <option value="de">German</option>
+              <option value="ja">Japanese</option>
+              <option value="pt">Portuguese</option>
+              <option value="ar">Arabic</option>
+            </select>
+            </select>
+            <div class="gender">
+              <input type="checkbox" name="match" value="Male" checked> Male
+              <input type="checkbox" name="match" value="Female" checked> Female
+            </div>
+            <input class="btn-get-started" type="submit" name="action" value="Generate Video" style="margin-bottom: auto; color: black;">
+          </div>
+        </form>
+      </div>
+      <div>
+        {% if msg %}
+        <h2 class="btn-get-started">{{ msg }}</h2>
+        {% endif %}
+      </div>
+      <div><strong class="bi bi-arrow-down-circle" style="color: white;"></strong></div>
+    </div>
+    
+  </section><!-- End Hero Section -->
+  <div id="hero">
+    <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+      <div class="transparent-box" style="overflow: auto;">
+        <h2>RESULT:</h2>
+        <div>
+        <!--<h2 class="btn-get-started"> The extracted text from the image is:</h2>
+        <img src="static/test-img/temp.png" type="image/png" style="border-radius: 2%;"/>
+        <div id="output" class="btn-get-started-text" style="overflow: auto;"> <h2 id="myText" style="font-size: small;">{{ extracted_text }}</h2></div>
+        <button class="btn-get-started" onclick="copyToClipboard()">Copy Text</button>-->
+          {% if Original_video and Translated_video%}
+          <div id="video-container">
+
+            <button id="original-button">Original Video</button>
+        
+            <button id="translated-button" >Translated Video</button>
+        
+            <div id="video-box1" style="display: block;">
+        
+              <video id="original-video" width="640" height="360" controls>
+                <source src={{Original_video}} type="video/mp4">
+              </video>
+            </div>
+            <div id="video-box2" style="display: none;">
+              <video id="translated-video" width="640" height="360" controls>
+                <source src={{Translated_video}} type="video/mp4">
+              </video>
+            </div>
+            <button class="download-btn">Download</button>
+
+        
+          </div>
+          
+          <script>
+
+
+            document.getElementById("original-button").addEventListener("click", function() {
+
+              document.getElementById("video-box1").style.display = "block";
+              document.getElementById("video-box2").style.display = "none";
+
+            });
+
+
+            document.getElementById("translated-button").addEventListener("click", function() {
+
+              document.getElementById("video-box2").style.display = "block";
+
+              document.getElementById("video-box1").style.display = "none";
+              
+
+            });
+
+
+            document.getElementById("download-button").addEventListener("click", function() {
+
+              // Code to download translated video goes here
+
+            });
+          </script>
+          {% else %}
+          <div>
+            <h3 class="extract_video" style="font-size: large;">No extract Video </h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
